@@ -8,10 +8,10 @@
 from __future__ import division
 import sys
 sys.dont_write_bytecode = True
-import math
+# import math
 
 
-class naive_bayes(object):
+class NaiveBayes(object):
 
     def __init__(self, data, features_set):
         self.data = data
@@ -21,6 +21,7 @@ class naive_bayes(object):
      probabilities of likelyhood.
 
     """
+
     def process(self):
         self.probs = {}
         self.all_labels = list(set([a[0] for a in self.data]))
@@ -31,6 +32,7 @@ class naive_bayes(object):
         self.probs['features_p'] = {}
         self.probs['likelyhood_p'] = {}
         self.probs['likelyhood_c'] = {}
+
         # transposed features for calculating evidence probabilities
         k = zip(*map(lambda n: n[1], self.data))
 
@@ -50,7 +52,7 @@ class naive_bayes(object):
             self.probs['features_p'][self.features[i]] = self.probs['features_c'][self.features[i]]/len(self.data)
             self.probs['features_p']['not_'+self.features[i]] = self.probs['features_c']['not_'+self.features[i]]/len(self.data)
 
-        #calculating likelyhood probabilities
+        # calculating likelyhood probabilities
         for i in range(0, len(self.features)):
             self.probs['likelyhood_c'][self.features[i]] = {}
             self.probs['likelyhood_p'][self.features[i]] = {}
@@ -70,9 +72,9 @@ class naive_bayes(object):
                         self.probs['likelyhood_c']['not_'+self.features[i]][b[0]] = 1
                     self.probs['likelyhood_p']['not_'+self.features[i]][b[0]] = self.probs['likelyhood_c']['not_'+self.features[i]][b[0]]/self.probs['labels_c'][b[0]]
 
-    #predictor method
-    #calculates conditional probabilities for all the unique labels and
-    #returns the one with max score.
+    # predictor method
+    # calculates conditional probabilities for all the unique labels and
+    # returns the one with max score.
     def predict(self, vector, key_only=False):
         all_features_rep = []
         for i in range(0, len(vector)):
