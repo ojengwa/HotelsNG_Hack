@@ -107,8 +107,3 @@ with open('dataset.json') as data_file:
             out.write(features + '\n')
 
 
-
-
-
-
-
