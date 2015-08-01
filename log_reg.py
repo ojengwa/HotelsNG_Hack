@@ -1,5 +1,5 @@
-from numpy import loadtxt, where, zeros, e, array, log, ones, mean, where
-from pylab import scatter, show, legend, xlabel, ylabel, plot
+from numpy import loadtxt, zeros, e, array, log, ones, where
+from pylab import scatter, legend, xlabel, ylabel, plot
 from scipy.optimize import fmin_bfgs
 
 
@@ -33,7 +33,7 @@ def compute_cost(theta, X, y):
 
 def compute_grad(theta, X, y):
 
-    #print theta.shape
+    # print theta.shape
 
     theta.shape = (1, 3)
 
@@ -51,12 +51,12 @@ def compute_grad(theta, X, y):
 
     theta.shape = (3,)
 
-    return  grad
+    return grad
 
 
-#load the dataset
+# load the dataset
 data = loadtxt('ex2data1.txt', delimiter=',')
-
+print(data)
 X = data[:, 0:2]
 y = data[:, 2]
 
@@ -67,13 +67,13 @@ scatter(X[neg, 0], X[neg, 1], marker='x', c='r')
 xlabel('Exam 1 score')
 ylabel('Exam 2 score')
 legend(['Not Admitted', 'Admitted'])
-#show()
+# show()
 
 m, n = X.shape
 
 y.shape = (m, 1)
 
-#Add intercept term to x and X_test
+# Add intercept term to x and X_test
 it = ones(shape=(m, 3))
 it[:, 1:3] = X
 
@@ -85,7 +85,7 @@ def decorated_cost(it, y):
     def fprime(theta):
         return compute_grad(theta, it, y)
 
-    #Initialize theta parameters
+    # Initialize theta parameters
     theta = zeros(3)
 
     return fmin_bfgs(f, theta, fprime, disp=True, maxiter=400)
@@ -94,12 +94,12 @@ decorated_cost(it, y)
 theta = [-25.161272, 0.206233, 0.201470]
 
 
-#Plotting the decision boundary
+# Plotting the decision boundary
 plot_x = array([min(it[:, 1]) - 2, max(it[:, 2]) + 2])
 plot_y = (- 1.0 / theta[2]) * (theta[1] * plot_x + theta[0])
 plot(plot_x, plot_y)
 legend(['Decision Boundary', 'Not admitted', 'Admitted'])
-#show()
+# show()
 
 prob = sigmoid(array([1.0, 45.0, 85.0]).dot(array(theta).T))
 print 'For a student with scores 45 and 85, we predict and admission ' + \
@@ -123,6 +123,7 @@ def predict(theta, X):
 
     return p
 
-#Compute accuracy on our training set
+
+# Compute accuracy on our training set
 p = predict(array(theta), it)
 print 'Train Accuracy: %f' % ((y[where(p == y)].size / float(y.size)) * 100.0)

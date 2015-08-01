@@ -1,8 +1,11 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+
 ex2data1.txt
 ex2data2.txt
+log_reg_regular.py
+
 # C extensions
 *.so
 
