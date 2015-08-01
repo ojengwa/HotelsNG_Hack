@@ -1,0 +1,18 @@
+{
+  "name": "logistic",
+  "version": "1.0.0",
+  "description": "sfs",
+  "main": "check.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsonfy": "^0.1.0",
+    "lodash": "^3.10.0",
+    "request": "^2.60.0",
+    "requests": "^0.1.6",
+    "underscore": "^1.8.3"
+  }
+}
